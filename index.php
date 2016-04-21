@@ -21,6 +21,7 @@
 				<li>She upvotes two other comments that respond to the same post.</li>
 				<li>She downvotes one other comment that responds to the same post.</li>
 				<li>She is mentioned by another user in a comment responding to the same post.</li>
+				<li>Sara logs out.</li>
 			</ol>
 		</main>
 	</body>
