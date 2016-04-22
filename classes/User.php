@@ -150,31 +150,29 @@ class User implements \JsonSerializable {
 			if($profileId <= 0) {
 				throw(new \PDOException('username is not positive:'));
 			}
+			// create query template
+			$query = "SELECT userId, email FROM user WHERE userId = :userId";
+			$statement = $pdo->prepare($query);
 
+			//bind the userId to the place holder in the template
+			$parameters = ["userId" => $userId];
+			$statement->execute($parameters);
 
-
-
-
-
-			
+			//grab the User from mySQL
+			try {
+				$user = null;
+				$statement->setFetchMode(\PDO::FETCH_ASSOC);
+				$row = $statement->fetch();
+				if($row !== false) {
+					$user = new User($row["userId"]);
+				}
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+			return($user);
 		}
-
-
-
-
-
-
-
-
-		public_function getUserById($id);
-
-
-
-
-
-
-
-
+		
 
 
 
