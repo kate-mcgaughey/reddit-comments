@@ -127,9 +127,37 @@ class User implements \JsonSerializable {
 			if($this->userId === null) {
 				throw(new \PDOException("Unable to update a profile that does not exist"));
 			}
-			
+
+			// create query template
+			@query = "UPDATE user SET email = :email WHERE userId = :userId"
+			$statement = $pdo->prepare($query);
+
+			//bind the member variable to the place holder in the template
+			$parameters = ["email" => $this->email => $statement->execute($parameters);
 		}
 
+		/**
+		 * gets the User by userId
+		 *
+		 * @param \PDO $pdo $pdo PDO connection object
+		 * @param int $userId user id to search for
+		 * @return Profile|null Profile or null if not found
+		 * @throws \PDOException when mySQL-related errors occur
+		 * @throws \TypeError when variables are not the correct data type
+		 * **/
+		public static function getUserByUserId(\PDO $pdo, int $userId) {
+			// sanitize the userId before searching
+			if($profileId <= 0) {
+				throw(new \PDOException('username is not positive:'));
+			}
+
+
+
+
+
+
+			
+		}
 
 
 
