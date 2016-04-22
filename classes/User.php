@@ -86,7 +86,7 @@ class User implements \JsonSerializable {
 
 
 
-		
+
 		/**
 		 * Temporary for 4/21/16 - Skipping ahead to homework assignment on DAO design pattern
 		 *
@@ -96,8 +96,23 @@ class User implements \JsonSerializable {
 		 * @throws \PDOException when mySQL-related errors occur
 		 * @throws \TypeError if $pdo is not a PDO connection object
 		 * **/
-		 */
-		public_function setEmail(string $newEmail) {
+
+		public_function insert(\PDO $pdo) {
+			// enforce the userId is null and doesn't already exist
+			if($this->userId !== null) {
+				throw(new \PDOException("Not a new userId"));
+			}
+
+			// crete query template   NOTE: I am suspecting at this point I may want another primary key, UserName
+			$query = "INSERT INTO user(email) VALUES(:email)";
+			$statement = $pdo->prepare($query);
+
+			
+
+
+
+
+		}
 
 
 
@@ -109,6 +124,73 @@ class User implements \JsonSerializable {
 
 
 		public_function getUserById($id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
