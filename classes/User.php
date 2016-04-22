@@ -57,5 +57,79 @@ class User implements \JsonSerializable {
 		return($this->userId);
 	}
 
-	
+	/**
+	 * mutator method for userId
+	 *
+	 *@param int|null $newProfileId value of new profile Id
+	 * @throws \RangeException if $newProfileId is not positive
+	 * @throws \TypeError if $newUserId is not an integer
+	 **/
+	public function setUserId(int $newUserId = null) {
+		// base case: if the userId is null, this is a new user without a mySQL assigned id (yet)
+		if($newUserId === null) {
+			$this->userId = null;
+			return;
+		}
+
+		// verify the email is secure
+		$newEmail = trim(newEmail);
+		$newEmail = filter_var($newEmail, FILTER_SANITIZE_STRING);
+		if(empty($newEmail) === true) {
+			throw(new \InvalidArgumentException("Email is empty or insecure"));
+		}
+		// verify the email will fit in the database
+		if(strlen($newEmail) > 254) {
+			throw(new \RangeException("Email is too large"));
+		}
+
+
+
+
+
+		
+		/**
+		 * Temporary for 4/21/16 - Skipping ahead to homework assignment on DAO design pattern
+		 *
+		 * inserts this User into MySQL
+		 *
+		 * @param \PDO $pdo PDO connection object
+		 * @throws \PDOException when mySQL-related errors occur
+		 * @throws \TypeError if $pdo is not a PDO connection object
+		 * **/
+		 */
+		public_function setEmail(string $newEmail) {
+
+
+
+
+
+
+
+
+
+
+		public_function getUserById($id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
 }
