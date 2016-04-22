@@ -115,6 +115,20 @@ class User implements \JsonSerializable {
 			$this->userId = intval($pdo->lastInsertId());
 		}
 
+		/**
+		 * updates this User from mySQL
+		 *
+		 * @param \PDO $pdo PDO connection object
+		 * @throws \PDOException when mySQL-related errors occur
+		 * @throws \TypeError if $pdo is not a PDO connection object
+		 * **/
+		public function update(\PDO $pdo) {
+			//enforce the userId is not null and doesn't already exist
+			if($this->userId === null) {
+				throw(new \PDOException("Unable to update a profile that does not exist"));
+			}
+			
+		}
 
 
 
