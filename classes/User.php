@@ -172,7 +172,46 @@ class User implements \JsonSerializable {
 			}
 			return($user);
 		}
-		
+
+		/**
+		 * gets the User by email
+		 *
+		 *@param \PDO $pdo PDO connection object
+		 *@param string $email email to search for
+		 *@return User| null User or null if not found
+		 *@throws \PDOException when mySQL-related errors occur
+		 *@throws \TypeError when variables are not the correct data type
+		 **/
+		public static function getUserbyEmail(\PDO $pdo, string $email) {
+			//sanitize the email before searching
+			$email = trim($email);
+			$email = filter_var($email, FILTER_VALIDATE_EMAIL);
+			if(empty($email) === true) {
+				throw(new \PDOException("not a valid email"));
+			}
+
+			//create query template
+			$query = "SELECT userId, email FROM user WHERE email = :email";
+			$statement = $pdo->prepare($query);
+
+			// bind the userId to the placeholder in the template
+			$parameters = ["email" => $email];
+			$statement->execute($parameters);
+
+			// grab the User from mySQL
+			try {
+					$user = null;
+					$statement->setFetchMode(\PDO::FETCH_ASSOC);
+					$row = $statement->fetch();
+					if($row !== false) {
+						$user  = new User($row["userId"], $row["email"]);
+					}
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				$throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+			return($user);
+		}
 
 
 
