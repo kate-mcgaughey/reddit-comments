@@ -48,6 +48,14 @@ class User implements \JsonSerializable {
 			throw(new \Exception($exception->getMessage(), 0, $exception));
 		}
 	}
+/**
+ * accessor method for userId
+ *
+ * @return int|null value of user id (or null if new Profile)
+ **/
+	public function getUserId() {
+		return($this->userId);
+	}
 
-
+	
 }
