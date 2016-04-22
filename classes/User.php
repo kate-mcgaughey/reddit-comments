@@ -90,20 +90,22 @@ class User implements \JsonSerializable {
 		/**
 		 * Temporary for 4/21/16 - Skipping ahead to homework assignment on DAO design pattern
 		 *
-		 * inserts this User into MySQL
+		 * inserts this User into mySQL
 		 *
 		 * @param \PDO $pdo PDO connection object
 		 * @throws \PDOException when mySQL-related errors occur
 		 * @throws \TypeError if $pdo is not a PDO connection object
 		 * **/
 
-		public_function insert(\PDO $pdo) {
+		public function insert(\PDO $pdo) {
 			// enforce the userId is null and doesn't already exist
 			if($this->userId !== null) {
 				throw(new \PDOException("Not a new userId"));
 			}
 
-			// crete query template   NOTE: I am suspecting at this point I may want another primary key, UserName
+			// NOTE: I am suspecting at this point I may want another primary key! userName?
+
+			// crete query template
 			$query = "INSERT INTO user(email) VALUES(:email)";
 			$statement = $pdo->prepare($query);
 
@@ -141,13 +143,13 @@ class User implements \JsonSerializable {
 		 *
 		 * @param \PDO $pdo $pdo PDO connection object
 		 * @param int $userId user id to search for
-		 * @return Profile|null Profile or null if not found
+		 * @return User|null User or null if not found
 		 * @throws \PDOException when mySQL-related errors occur
 		 * @throws \TypeError when variables are not the correct data type
 		 * **/
 		public static function getUserByUserId(\PDO $pdo, int $userId) {
 			// sanitize the userId before searching
-			if($profileId <= 0) {
+			if($userId <= 0) {
 				throw(new \PDOException('username is not positive:'));
 			}
 			// create query template
@@ -219,33 +221,15 @@ class User implements \JsonSerializable {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ASSIGNMENT: complete the DAO design pattern:
+insert(): method to insert brand new object and grab primary key
+update(): method to update an existing object
+delete(): method to delete an object
+at least two of:
+ getFooByBar(): grab your class "Foo" by attribute "Bar"
+ grab one by the primary key and have it return an a single object: getFooByFooId()   answer the question, "mySQL, may I have fooId = 42, please?"
+ example from class: getTweetByTweetId()
+ grab many by a field of your choice and have it return an array of objects   example from class: getTweetByTweetContent() is designed to return all objects   that contain whatever the user searched for
 
 
 
