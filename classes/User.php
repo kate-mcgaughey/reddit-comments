@@ -107,6 +107,10 @@ class User implements \JsonSerializable {
 			$query = "INSERT INTO user(email) VALUES(:email)";
 			$statement = $pdo->prepare($query);
 
+			// bind the member variables to the place holders in the template
+			$parameters = ["email" => $this->email];
+			$statement->execute($parameters);
+
 			
 
 
