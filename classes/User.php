@@ -189,7 +189,7 @@ class User implements \JsonSerializable {
 			$email = trim($email);
 			$email = filter_var($email, FILTER_VALIDATE_EMAIL);
 			if(empty($email) === true) {
-				throw(new \PDOException("not a valid email"));
+				throw(new \PDOException("mySQL, may I have userId = 42, please?"));
 			}
 
 			//create query template
