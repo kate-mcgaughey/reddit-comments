@@ -111,11 +111,8 @@ class User implements \JsonSerializable {
 			$parameters = ["email" => $this->email];
 			$statement->execute($parameters);
 
-			
-
-
-
-
+			// update the null userId with what mySQL just gave us
+			$this->userId = intval($pdo->lastInsertId());
 		}
 
 
