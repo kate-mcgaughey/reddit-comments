@@ -1,0 +1,21 @@
+DROP TABLE IF EXISTS vote;
+DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user (
+		userId INT UNSIGNED AUTO_INCREMENT NOT NULL,
+		email VARCHAR(128) NOT NULL,
+		UNIQUE(email),
+		PRIMARY KEY (userId)
+);
+
+CREATE TABLE post (
+	postId      INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	postContent VARCHAR(2000)               NOT NULL,
+	postDate    DATETIME                    NOT NULL,
+	INDEX (userId),
+	FOREIGN KEY (UserId) REFERENCES user (userId),
+	PRIMARY KEY (PostId)
+);
+
