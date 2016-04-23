@@ -1,10 +1,23 @@
 <?php
-namespace Edu\Cnm\Kmcgaughey\Reddit-Comments;
+namespace Edu\Cnm\Kmcgaughey\RedditComments;
 
 /**
- * Deconstruction of Reddit Comments
- * DOC BLOCK
- */
+ * This is a breakdown of Reddit comments. Comments are posted about submissions, then voted on by users, affecting their sort ordrer. Submissions and comments are structured as a thread.
+ *
+ * @author Kate McGaughey <therealmcgaughey@gmail.com>
+ * **/
+
+/**doc block format /**
+ * TL; DR for the class or method - this is normally put in an <h1> or similar *
+ * longer description of what you're documenting - this is normally a <p> or similar
+ * take as many lines as necessary to explain what this is *
+ * tags that start with an @ character as applicable:
+ * @param <type> $paramName description of a parameter
+ * @return <type> what this method returns
+ * @throws <ExceptionType> what this method throws
+ * @author <Full Name> <Email>
+ * @see http://php.net/ link to the documentation :D
+ * @see FooClass link to some other class in this project **/
 
 class User implements \JsonSerializable {
 	/**
@@ -277,5 +290,16 @@ at least two of:
 
 
 
+	}
+
+	/**
+	 * Specify data which should be serialized to JSON
+	 * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+	 * @return mixed data which can be serialized by <b>json_encode</b>,
+	 * which is a value of any type other than a resource.
+	 * @since 5.4.0
+	 */
+	function jsonSerialize() {
+		// TODO: Implement jsonSerialize() method.
 	}
 }
