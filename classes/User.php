@@ -28,18 +28,15 @@ class User implements \JsonSerializable {
 	private $passwordHash;
 
 	/**
-	 * User constructor
+	 * Constructor method for userId
 	 *
-	 * @param string|null $UserId of this User or null if a new User
+	 * @param string|null $userId of this User or null if a new User
 	 * @param string $userEmail String containing UserEmail
 	 * @param string $passwordHash Hash of the profile
-	 * @throws \InvalidArgumentException if data types are not valid
-	 * @throws \RangeException if data values are out of bounds
-	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurrs
-	 *
+	 * @throws \TypeError if data types violate type hints
+	 * @internal param null|string $UserId of this User or null if a new User
 	 */
-
 	public function __construct($userId, $userEmail, $passwordHash) {
 		try {
 				$this->setUserId($userId);
@@ -60,7 +57,7 @@ class User implements \JsonSerializable {
 		}
 	}
 /**
- * accessor method for userId
+ * Accessor method for userId
  *
  * @return string|null value of user id (or null if new Profile)
  **/
@@ -71,9 +68,9 @@ class User implements \JsonSerializable {
 	/**
 	 * mutator method for userId
 	 *
-	 *@param int|null $newProfileId value of new profile Id
-	 * @throws \RangeException if $newProfileId is not positive
-	 * @throws \TypeError if $newUserId is not an integer
+	 * @param string|null $userId value of new profile Id
+	 * @throws \RangeException if $userId is not positive
+	 * @throws \TypeError if $UserId is not an integer
 	 **/
 	public function setUserId(int $newUserId = null) {
 		// base case: if the userId is null, this is a new user without a mySQL assigned id (yet)
