@@ -7,10 +7,11 @@ namespace Edu\Cnm\Kmcgaughey\RedditComments;
  * @author Kate McGaughey <therealmcgaughey@gmail.com>
  * **/
 
-class User {
+class User implements \JsonSerializable {
+
 	/**
-	 * ID for this User; this is the primary key
-	 * @var int $userId
+	 * ID for this user; this is the primary key
+	 * @var string $userId
 	 */
 	private $userId;
 
@@ -26,23 +27,24 @@ class User {
 	 */
 	private $passwordHash;
 
-	 /**
-	 * Constructor for a User
+	/**
+	 * User constructor
 	 *
-	 * @param int|null $UserId of this User or null if a new User
-	 * @param string $userEmail string containing UserEmail
-	 * @param string $hash Hash of the profile
+	 * @param string|null $UserId of this User or null if a new User
+	 * @param string $userEmail String containing UserEmail
+	 * @param string $passwordHash Hash of the profile
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurrs
-	 **/
+	 *
+	 */
 
 	public function __construct($userId, $userEmail, $passwordHash) {
 		try {
 				$this->setUserId($userId);
 				$this->setUserEmail($userEmail);
-				$this->setPasswordHash($hash);
+				$this->setPasswordHash($passwordHash);
 		} catch(\InvalidArgumentException $invalidArgument) {
 			// rethrow the exception to the caller
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
@@ -60,7 +62,7 @@ class User {
 /**
  * accessor method for userId
  *
- * @return int|null value of user id (or null if new Profile)
+ * @return string|null value of user id (or null if new Profile)
  **/
 	public function getUserId() {
 		return($this->userId);
@@ -298,4 +300,8 @@ at least two of:
 	function jsonSerialize() {
 		// TODO: Implement jsonSerialize() method.
 	}
+
+	private function setUserEmail($userEmail) {
+	}
+	private function setPasswordHash($passwordHash) {
 }
