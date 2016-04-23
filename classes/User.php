@@ -37,10 +37,11 @@ class User implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurrs
 	 **/
 
-	public function __construct(int $newUserId = null, string $newUserEmail) {
+	public function __construct($newUserId, $newUserEmail, $newPasswordHash) {
 		try {
 			$this->setUserId($newUserId);
 			$this->setUserEmail($newUserEmail);
+			$this->setPasswordHash($newPasswordHash);
 		} catch(\InvalidArgumentException $invalidArgument) {
 			// rethrow the exception to the caller
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
