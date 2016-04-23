@@ -7,7 +7,7 @@ namespace Edu\Cnm\Kmcgaughey\RedditComments;
  * @author Kate McGaughey <therealmcgaughey@gmail.com>
  * **/
 
-class User implements \JsonSerializable {
+class User {
 	/**
 	 * ID for this User; this is the primary key
 	 * @var int $userId
@@ -29,19 +29,20 @@ class User implements \JsonSerializable {
 	 /**
 	 * Constructor for a User
 	 *
-	 * @param int|null $newUserId of this User or null if a new User
-	 * @param string $newUserEmail string containing newUserEmail
+	 * @param int|null $UserId of this User or null if a new User
+	 * @param string $userEmail string containing UserEmail
+	 * @param string $hash Hash of the profile
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurrs
 	 **/
 
-	public function __construct($newUserId, $newUserEmail, $newPasswordHash) {
+	public function __construct($userId, $userEmail, $passwordHash) {
 		try {
-			$this->setUserId($newUserId);
-			$this->setUserEmail($newUserEmail);
-			$this->setPasswordHash($newPasswordHash);
+				$this->setUserId($userId);
+				$this->setUserEmail($userEmail);
+				$this->setPasswordHash($hash);
 		} catch(\InvalidArgumentException $invalidArgument) {
 			// rethrow the exception to the caller
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
