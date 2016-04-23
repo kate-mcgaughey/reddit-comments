@@ -7,33 +7,27 @@ namespace Edu\Cnm\Kmcgaughey\RedditComments;
  * @author Kate McGaughey <therealmcgaughey@gmail.com>
  * **/
 
-/**doc block format /**
- * TL; DR for the class or method - this is normally put in an <h1> or similar *
- * longer description of what you're documenting - this is normally a <p> or similar
- * take as many lines as necessary to explain what this is *
- * tags that start with an @ character as applicable:
- * @param <type> $paramName description of a parameter
- * @return <type> what this method returns
- * @throws <ExceptionType> what this method throws
- * @author <Full Name> <Email>
- * @see http://php.net/ link to the documentation :D
- * @see FooClass link to some other class in this project **/
-
 class User implements \JsonSerializable {
 	/**
-	 * id for this User; this is the primary key
-	 * * @var int $userId
-	 **/
+	 * ID for this User; this is the primary key
+	 * @var int $userId
+	 */
 	private $userId;
-	**/
-	* email for thie User; this is a unique index
-	*@var string $userEmail
+
+	/**
+	* Email associated with account; this is a unique index
+	* @var string $userEmail
 	**/
 	private $userEmail;
+
 	/**
+	 * Has for the profile
+	 * @var string $passwordHash
+	 */
+	private $passwordHash;
 
 	 /**
-	 * constructor for this User
+	 * Constructor for a User
 	 *
 	 * @param int|null $newUserId of this User or null if a new User
 	 * @param string $newUserEmail string containing newUserEmail
