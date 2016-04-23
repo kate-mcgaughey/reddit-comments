@@ -66,34 +66,28 @@ class User implements \JsonSerializable {
 	}
 
 	/**
-	 * mutator method for userId
+	 * Mutator method for userId
 	 *
-	 * @param string|null $userId value of new profile Id
-	 * @throws \RangeException if $userId is not positive
-	 * @throws \TypeError if $UserId is not an integer
+	 * @param string|null $newUserId Value of new User ID
+
 	 **/
 	public function setUserId(int $newUserId = null) {
-		// base case: if the userId is null, this is a new user without a mySQL assigned id (yet)
+		// Base Case: if the userId is null, this is a new user without a mySQL assigned id (yet)
 		if($newUserId === null) {
 			$this->userId = null;
 			return;
 		}
 
-		// verify the email is secure
-		$newEmail = trim(newEmail);
-		$newEmail = filter_var($newEmail, FILTER_SANITIZE_STRING);
+		// Verify the new user ID
+		$newUserId = filter_var($newUserId, FILTER_SANITIZE_STRING);
 		if(empty($newEmail) === true) {
-			throw(new \InvalidArgumentException("Email is empty or insecure"));
-		}
-		// verify the email will fit in the database
-		if(strlen($newEmail) > 254) {
-			throw(new \RangeException("Email is too large"));
+			throw(new \InvalidArgumentException("User ID is empty"));
 		}
 
-
-
-
-
+		// Verify the user ID will fit in the database
+		if(strlen($newUserId) > 20) {
+			throw(new \RangeException("User ID is limited to 20 characters."));
+		}
 
 		/**
 		 * Temporary for 4/21/16 - Skipping ahead to homework assignment on DAO design pattern
