@@ -109,7 +109,7 @@ class User implements \JsonSerializable {
 	public function setUsername(string $newUsername) {
 		// Verify the username is secure
 		$newUsername = trim($newUsername);
-		$newUserId = filter_var($newUsername, FILTER_SANITIZE_STRING);
+		$newUsername = filter_var($newUsername, FILTER_SANITIZE_STRING);
 		if(empty($newUsername) === true) {
 			throw (new \InvalidArgumentException("username is empty or insecure"));
 		}
