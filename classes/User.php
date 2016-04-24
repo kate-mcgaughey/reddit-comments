@@ -129,11 +129,30 @@ class User implements \JsonSerializable {
 	public function getPasswordHash() {
 		return $this->passwordHash;
 	}
-	
+
+	/** Mutator for the hash
+	 *
+	 * @param string $newPasswordHash hash of the profile
+	 */
+	public function setPasswordHash($newPasswordHash) {
+		// Verify the hash is secure
+		$newPasswordHash = trim($newPasswordHash);
+		$newPasswordHash = filter_var($newPasswordHash, FILTER_SANITIZE_STRING);
+		if(empty($newPasswordHash) === true) {
+			throw (new \InvalidArgumentException("Hash is empty or insecure"));
+		}
+
+		// Verify the hash will fit in the database
+		if(strlen($newPasswordHash) > 64) {
+			throw (new \RangeException("Hash too large"));
+		}
+		// Store the new hash
+		$this->passwordHash = $newPasswordHash;
+	}
+
 		/**
-		 * Temporary for 4/21/16 - Skipping ahead to homework assignment on DAO design pattern
 		 *
-		 * inserts this User into mySQL
+		 * Inserts this User into mySQL
 		 *
 		 * @param \PDO $pdo PDO connection object
 		 * @throws \PDOException when mySQL-related errors occur
