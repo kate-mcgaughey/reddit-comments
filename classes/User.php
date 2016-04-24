@@ -86,11 +86,18 @@ class User implements \JsonSerializable {
 
 		// Convert and store the User id
 		$this->userId = intval($newUserId);
-		}
-		
+	}
 
+	/**
+	 * Accessor method for username
+	 *
+	 * @return string value of username
+	 **/
+	public function getUsername() {
+		return($this->Username);
+	}
 
-
+	
 		$newUserId = filter_var($newUserId, FILTER_SANITIZE_STRING);
 
 
