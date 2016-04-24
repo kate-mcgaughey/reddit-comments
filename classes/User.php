@@ -27,13 +27,15 @@ class User implements \JsonSerializable {
 	private $passwordHash;
 
 	/**
-	 * Constructor method for userId
+	 * Constructor method for User <--Do I really mean User here?
 	 *
 	 * @param int|null $userId of this User or null if a new User
+	 * @param string $username Username of the User
 	 * @param string $passwordHash Hash of the profile
-	 * @throws \Exception if some other exception occurrs
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bounds (e.g., too long, negative integers)
 	 * @throws \TypeError if data types violate type hints
-	 * @internal param null|string $UserId of this User or null if a new User
+	 * @throws \Exception if some other exception occurrs
 	 */
 	public function __construct($userId, $userEmail, $passwordHash) {
 		try {
