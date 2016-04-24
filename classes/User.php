@@ -97,8 +97,29 @@ class User implements \JsonSerializable {
 		return($this->Username);
 	}
 
-	
-		$newUserId = filter_var($newUserId, FILTER_SANITIZE_STRING);
+	/**
+	 * Mutator method for username
+	 *
+	 * @param string $newUsername value of new username
+	 * @throws \InvalidArgumentException if $newUsername is not a string or insecure
+	 * @throws \RangeException if $newUsername is > 20 characters
+	 * @throws \TypeError if $newUsername is not a string
+	 **/
+	public function setUsername(string $newUsername) {
+		// Verify the username is secure
+		$newUsername = trim($newUsername);
+		$newUserId = filter_var($newUsername, FILTER_SANITIZE_STRING);
+		if(empty($newUsername) === true) {
+			throw (new \InvalidArgumentException("username is empty or insecure"));
+		}
+		// Verify the username will fit in the database
+		if(strlen($newUsername) > 20) {
+			throw (new \RangeException("username is limited to 20 characters"));
+		}
+		// Store the username
+		$this->username = $newUsername;
+	}
+
 
 
 
