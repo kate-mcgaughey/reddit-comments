@@ -59,7 +59,7 @@ class User implements \JsonSerializable {
 /**
  * Accessor method for userId
  *
- * @return string|null value of user id (or null if new Profile)
+ * @return int|null value of user id (or null if new User)
  **/
 	public function getUserId() {
 		return($this->userId);
@@ -68,26 +68,32 @@ class User implements \JsonSerializable {
 	/**
 	 * Mutator method for userId
 	 *
-	 * @param string|null $newUserId Value of new User ID
-
+	 * @param int|null $newUserId value of new User ID
+	 * @throws \RangeException if $newUserId is not positive
+	 * @throws  \TypeError if $newUserId is not an integer
 	 **/
 	public function setUserId(int $newUserId = null) {
-		// Base Case: if the userId is null, this is a new user without a mySQL assigned id (yet)
+		// Base Case: if the userId is null, this is a new User without a mySQL assigned id (yet)
 		if($newUserId === null) {
 			$this->userId = null;
 			return;
 		}
 
-		// Verify the new user ID
-		$newUserId = filter_var($newUserId, FILTER_SANITIZE_STRING);
-		if(empty($newEmail) === true) {
-			throw(new \InvalidArgumentException("User ID is empty"));
+		// Verify the new User ID is positive
+		if($newUserId <= 0 {
+			throw(new \RangeException("profile id is not positive"));
 		}
 
-		// Verify the user ID will fit in the database
-		if(strlen($newUserId) > 20) {
-			throw(new \RangeException("User ID is limited to 20 characters."));
+		// Convert and store the User id
+		$this->userId = intval($newUserId);
 		}
+		
+
+
+
+		$newUserId = filter_var($newUserId, FILTER_SANITIZE_STRING);
+
+
 
 		/**
 		 * Temporary for 4/21/16 - Skipping ahead to homework assignment on DAO design pattern
