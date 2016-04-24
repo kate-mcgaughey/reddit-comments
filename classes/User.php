@@ -159,25 +159,22 @@ class User implements \JsonSerializable {
 		 * @throws \PDOException when mySQL-related errors occur
 		 * @throws \TypeError if $pdo is not a PDO connection object
 		 * **/
-
-	public function insert(\PDO $pdo) {
-			// enforce the userId is null and doesn't already exist
+	public function insert(\PDO &$pdo) {
+			// Make sure this is a new user
 			if($this->userId !== null) {
-				throw(new \PDOException("Not a new userId"));
+				throw(new \PDOException("Not a new user"));
 			}
 
-			// NOTE: I am suspecting at this point I may want another primary key! userName?
-
-			// crete query template
-			$query = "INSERT INTO user(email) VALUES(:email)";
+			// Crete query template
+			$query = "INSERT INTO user(username, passwordHash) VALUES(:username, passwordHash)";
 			$statement = $pdo->prepare($query);
 
-			// bind the member variables to the place holders in the template
-			$parameters = ["email" => $this->email];
+			// Bind the member variables to the place holders in the template
+			$parameters = array(["username" => $this->getUsername(), "passwordHash" => $this->getPasswordHash()]);
 			$statement->execute($parameters);
 
-			// update the null userId with what mySQL just gave us
-			$this->userId = intval($pdo->lastInsertId());
+			// Update the null user id with what mySQL generated
+			$this->setUserId(intval($pdo->lastInsertId()));
 		}
 
 		/**
