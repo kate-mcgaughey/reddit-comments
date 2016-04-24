@@ -10,18 +10,18 @@ namespace Edu\Cnm\Kmcgaughey\RedditComments;
 class User implements \JsonSerializable {
 
 	/**
-	 * ID for this user; this is the primary key
+	 * id for this User; this is the primary key
 	 * @var int $userId
 	 */
 	private $userId;
 
 	/**
-	 * Username or at-handle
+	 * Username or at-handle; this is a unique index
 	 * @var string $username
 	 */
 
 	/**
-	 * Has for the profile
+	 * Has for the profile; (this is a unique index?)
 	 * @var string $passwordHash
 	 */
 	private $passwordHash;
@@ -29,19 +29,19 @@ class User implements \JsonSerializable {
 	/**
 	 * Constructor method for User <--Do I really mean User here?
 	 *
-	 * @param int|null $userId of this User or null if a new User
-	 * @param string $username Username of the User
-	 * @param string $passwordHash Hash of the profile
+	 * @param int|null $newUserId if of this User or null if a new User
+	 * @param string $newUsername string containing newUsername of the User
+	 * @param string $newPasswordHash Hash of the profile
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g., too long, negative integers)
 	 * @throws \TypeError if data types violate type hints
 	 * @throws \Exception if some other exception occurrs
 	 */
-	public function __construct($userId, $userEmail, $passwordHash) {
+	public function __construct(int $newUserId = null, string $newUsername, string $newPasswordHash) {
 		try {
-				$this->setUserId($userId);
-				$this->setUserEmail($userEmail);
-				$this->setPasswordHash($passwordHash);
+				$this->setUserId($newUserId);
+				$this->setUsername($newUsername);
+				$this->setPasswordHash($newPasswordHash);
 		} catch(\InvalidArgumentException $invalidArgument) {
 			// rethrow the exception to the caller
 			throw(new \InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
