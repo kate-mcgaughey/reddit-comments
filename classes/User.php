@@ -21,12 +21,6 @@ class User implements \JsonSerializable {
 	 */
 
 	/**
-	* Email associated with account; this is a unique index
-	* @var string $userEmail
-	**/
-	private $userEmail;
-
-	/**
 	 * Has for the profile
 	 * @var string $passwordHash
 	 */
@@ -35,8 +29,7 @@ class User implements \JsonSerializable {
 	/**
 	 * Constructor method for userId
 	 *
-	 * @param string|null $userId of this User or null if a new User
-	 * @param string $userEmail String containing UserEmail
+	 * @param int|null $userId of this User or null if a new User
 	 * @param string $passwordHash Hash of the profile
 	 * @throws \Exception if some other exception occurrs
 	 * @throws \TypeError if data types violate type hints
