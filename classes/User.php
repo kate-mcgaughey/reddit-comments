@@ -19,6 +19,7 @@ class User implements \JsonSerializable {
 	 * Username or at-handle; this is a unique index
 	 * @var string $username
 	 */
+	private $username;
 
 	/**
 	 * Has for the profile; (this is a unique index?)
@@ -80,7 +81,7 @@ class User implements \JsonSerializable {
 		}
 
 		// Verify the new User ID is positive
-		if($newUserId <= 0 {
+		if($newUserId <= 0) {
 			throw(new \RangeException("profile id is not positive"));
 		}
 
@@ -94,7 +95,7 @@ class User implements \JsonSerializable {
 	 * @return string value of username
 	 **/
 	public function getUsername() {
-		return($this->Username);
+		return($this->username);
 	}
 
 	/**
@@ -339,7 +340,17 @@ at least two of:
 
 
 
+	/**
+	 * Specify data which should be serialized to JSON
+	 * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+	 * @return mixed data which can be serialized by <b>json_encode</b>,
+	 * which is a value of any type other than a resource.
+	 * @since 5.4.0
+	 */
+	function jsonSerialize() {
+		// TODO: Implement jsonSerialize() method.
 	}
+}
 
 	/**
 	 * Specify data which should be serialized to JSON
