@@ -120,9 +120,16 @@ class User implements \JsonSerializable {
 		$this->username = $newUsername;
 	}
 
-
-
-
+	/**
+	 * Accessor method for the hash
+	 *
+	 * @return string value of hash
+	 *
+	 */
+	public function getPasswordHash() {
+		return $this->passwordHash;
+	}
+	
 		/**
 		 * Temporary for 4/21/16 - Skipping ahead to homework assignment on DAO design pattern
 		 *
@@ -133,7 +140,7 @@ class User implements \JsonSerializable {
 		 * @throws \TypeError if $pdo is not a PDO connection object
 		 * **/
 
-		public function insert(\PDO $pdo) {
+	public function insert(\PDO $pdo) {
 			// enforce the userId is null and doesn't already exist
 			if($this->userId !== null) {
 				throw(new \PDOException("Not a new userId"));
@@ -160,7 +167,7 @@ class User implements \JsonSerializable {
 		 * @throws \PDOException when mySQL-related errors occur
 		 * @throws \TypeError if $pdo is not a PDO connection object
 		 * **/
-		public function update(\PDO $pdo) {
+	public function update(\PDO $pdo) {
 			//enforce the userId is not null and doesn't already exist
 			if($this->userId === null) {
 				throw(new \PDOException("Unable to update a profile that does not exist"));
@@ -183,7 +190,7 @@ class User implements \JsonSerializable {
 		 * @throws \PDOException when mySQL-related errors occur
 		 * @throws \TypeError when variables are not the correct data type
 		 * **/
-		public static function getUserByUserId(\PDO $pdo, int $userId) {
+	public static function getUserByUserId(\PDO $pdo, int $userId) {
 			// sanitize the userId before searching
 			if($userId <= 0) {
 				throw(new \PDOException('username is not positive:'));
@@ -220,7 +227,7 @@ class User implements \JsonSerializable {
 		 *@throws \PDOException when mySQL-related errors occur
 		 *@throws \TypeError when variables are not the correct data type
 		 **/
-		public static function getUserbyEmail(\PDO $pdo, string $email) {
+	public static function getUserbyEmail(\PDO $pdo, string $email) {
 			//sanitize the email before searching
 			$email = trim($email);
 			$email = filter_var($email, FILTER_VALIDATE_EMAIL);
