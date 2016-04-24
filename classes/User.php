@@ -199,24 +199,25 @@ class User implements \JsonSerializable {
 		$statement->execute($parameters);
 		}
 		/**
-		 * updates this User from mySQL
+		 * Updates this User in mySQL
 		 *
 		 * @param \PDO $pdo PDO connection object
 		 * @throws \PDOException when mySQL-related errors occur
 		 * @throws \TypeError if $pdo is not a PDO connection object
 		 * **/
 	public function update(\PDO $pdo) {
-			//enforce the userId is not null and doesn't already exist
+			// Make sure this user exists
 			if($this->userId === null) {
 				throw(new \PDOException("Unable to update a profile that does not exist"));
 			}
 
-			// create query template
-			@query = "UPDATE user SET email = :email WHERE userId = :userId"
+			// Create query template
+			@query = "UPDATE user SET username = :username, passwordHash = :passwordHash WHERE userId = :userId";
 			$statement = $pdo->prepare($query);
 
-			//bind the member variable to the place holder in the template
-			$parameters = ["email" => $this->email => $statement->execute($parameters);
+			//Bind the member variables to the placeholders in the templates
+			$parameters = array["username" => $this->getUsername(), "passwordHash" => $this->getPasswordHash(), "userId" => $this->getUserId()];
+				$statement->execute($parameters);
 		}
 
 		/**
