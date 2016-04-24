@@ -11,9 +11,14 @@ class User implements \JsonSerializable {
 
 	/**
 	 * ID for this user; this is the primary key
-	 * @var string $userId
+	 * @var int $userId
 	 */
 	private $userId;
+
+	/**
+	 * Username or at-handle
+	 * @var string $username
+	 */
 
 	/**
 	* Email associated with account; this is a unique index
