@@ -178,6 +178,27 @@ class User implements \JsonSerializable {
 		}
 
 		/**
+		 * Deletes this user from mySQL
+		 *
+		 * @param PDO $pdo PDO connection object
+		 * @throws \PDOException when mySQL-related errors occur
+		 * @throws \TypeError if $pdo is not a PDO connection object
+		 **/
+	public function delete(PDO &$pdo) {
+		// Make sure this user exists
+		if($this->userId === null) {
+			throw (new \PDOException("Unable to delete a user that does not exist"));
+		}
+
+		// Create query template
+		$query = "DELETE FROM user WHERE userId = :userId";
+		$statement = $pdo->prepare($query);
+
+		// Bind the member variables to the placeholders in the templates
+		$parameters = array("userId" => $this->getUserId());
+		$statement->execute($parameters);
+		}
+		/**
 		 * updates this User from mySQL
 		 *
 		 * @param \PDO $pdo PDO connection object
