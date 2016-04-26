@@ -269,7 +269,7 @@ class User implements \JsonSerializable {
 		 * Gets the user by username
 		 *
 		 *@param \PDO $pdo PDO connection object
-		 *@param  $username Username to search for
+		 *@param  $username username to search for
 		 *@return \SplFixedArray of users found
 		 *@throws \PDOException when mySQL-related errors occur
 		 **/
